@@ -1,0 +1,20 @@
+/* .customerlist_wrapper {
+  border: 2px solid green;
+  height: 100px;
+  line-height: 300px;
+} */
+
+#customer_section {
+    margin-top: 15%;
+    text-align: center;
+    height: 600px;
+  }
+  
+  #Btn-layout {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    margin-bottom: 5%;
+    padding-right: 15%;
+  }
+  
