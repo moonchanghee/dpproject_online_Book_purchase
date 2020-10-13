@@ -4,6 +4,17 @@ import App from './App';
 import Axios from 'axios';
 
 const AppContainer = (props) => {
+  // const [BookData, setBookData] = useState([]);
+
+  const [BookData, setBookData] = useState([]);
+
+  useEffect(() => {
+    Axios.get('/main/book').then((res) => {
+      console.log(res.data.row);
+      setBookData(res.data.row);
+    });
+  }, []);
+
   useEffect(() => {
     Axios.get('/user/login').then((res) => {
       if (res.data.success) {
@@ -64,6 +75,7 @@ const AppContainer = (props) => {
 
   const onSubmitlogin = (e) => {
     e.preventDefault(); //페이지 refresh를 막아준다
+
     console.log('id :' + id);
     console.log('Password : ' + Password);
 
@@ -76,7 +88,7 @@ const AppContainer = (props) => {
         console.log('dd : ' + res.data.sess);
         setUsername(res.data.sess);
         setBool(true);
-        // history.push('/')
+
         // history.goBack()
         // props.history.goback()
       } else {
@@ -121,7 +133,17 @@ const AppContainer = (props) => {
     LogoutOnClick,
     onChangeName,
   };
-  const states = { Name, id, Id, Pwd, Email, Password, username, Bool };
+  const states = {
+    Name,
+    id,
+    Id,
+    Pwd,
+    Email,
+    Password,
+    username,
+    Bool,
+    BookData,
+  };
 
   return <App callbacks={callbacks} states={states} />;
 };

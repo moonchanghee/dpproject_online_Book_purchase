@@ -4,30 +4,15 @@ import { Table, Button } from 'antd';
 import { data } from '../CartData';
 import Axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
-const CartContent = ({ cartData }) => {
+const CartContent = () => {
   let history = useHistory();
 
-  const columns = [
+  const CartColumns = [
     {
       title: 'UserId',
       dataIndex: 'UserId',
       key: 'UserId',
     },
-    // {
-    //   title: 'Name',
-    //   dataIndex: 'name',
-    //   key: 'name',
-    // },
-    // {
-    //   title: 'Age',
-    //   dataIndex: 'age',
-    //   key: 'age',
-    // },
-    // {
-    //   title: 'Address',
-    //   dataIndex: 'address',
-    //   key: 'address',
-    // },
   ];
 
   const [currentPage, setCurrentPage] = useState(1); //시작
@@ -47,7 +32,7 @@ const CartContent = ({ cartData }) => {
       <div id="wrapper">
         <div id="customer_section">
           <Table
-            columns={columns}
+            columns={CartColumns}
             dataSource={datas}
             borderd
             pagination={false}

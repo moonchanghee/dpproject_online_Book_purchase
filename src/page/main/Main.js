@@ -1,19 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 import MainContent from './component/MainContent';
+import CartContent from '../cart/component/CartContent';
 import MainSider from '../component/MainSider';
 import { Layout, Menu } from 'antd';
+import { Table, Button } from 'antd';
 import 'antd/dist/antd.css';
 const { SubMenu } = Menu;
 const { Header, Footer, Sider, Content } = Layout;
 
 const Main = (props) => {
-  // const { book, setBook } = useState([{}]);
-  useEffect(() => {
-    Axios.get('/main/book').then((res) => {
-      console.log(res.data.row);
-    });
-  }, []);
+  const render = props.states.BookData.map((book) => {
+    return (
+      <>
+        <p>{book.book_no}</p>
+        <p>{book.book_name}</p>
+      </>
+    );
+  });
+
+  console.log(props.states.BookData);
+
   return (
     <>
       <Layout theme="light">
@@ -30,8 +37,7 @@ const Main = (props) => {
                 minHeight: 280,
               }}
             >
-              {props.states.username}
-              <MainContent />
+              <MainContent data={props.states.BookData} />
             </Content>
           </Layout>
         </Layout>
