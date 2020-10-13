@@ -20,7 +20,7 @@ app.use(session({
 
 
 app.use('/user', Users);
-app.use('/cart', Cart);
+// app.use('/cart', Cart);
 
 
 app.listen(port, () => console.log(`listening on port ${port}!`));
