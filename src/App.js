@@ -4,6 +4,7 @@ import Axios from 'axios';
 import { Switch, BrowserRouter, Route } from 'react-router-dom';
 import Register from './page/user/Register';
 import MainPage from './page/main/Main';
+import Card from './page/mypage/Card';
 import Login from './page/user/Login';
 import Cart from './page/cart/CartMain';
 import Mypage from './page/mypage/Mypage';
@@ -75,6 +76,13 @@ const App = ({ states, callbacks }) => {
             path="/mypage"
             render={(props) => (
               <Mypage {...props} states={states} callbacks={callbacks} />
+            )}
+          />
+          <Route
+            exact
+            path="/mypage/card"
+            render={(props) => (
+              <Card {...props} states={states} callbacks={callbacks} />
             )}
           />
           <Route

@@ -2,6 +2,8 @@ var express = require('express');
 var Users = require('./route/users');
 var Cart = require('./route/Cart');
 var Main = require('./route/Main');
+var Mypage = require('./route/Mypage');
+
 var app = express();
 var session = require('express-session');
 const bodyparser = require('body-parser');
@@ -20,6 +22,7 @@ app.use(
 );
 
 app.use('/main', Main);
+app.use('/mypage', Mypage);
 app.use('/user', Users);
 app.use('/cart', Cart);
 

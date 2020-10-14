@@ -20,7 +20,7 @@ router.post('/login', function (req, res, next) {
   var password = req.body.password;
   console.log(req.body);
   var sql =
-    'SELECT *FROM mydb.member WHERE mydb.member.member_id = ? AND mydb.member.member_pwd = ?';
+    'SELECT *FROM mydb.member WHERE mydb.member.member_no = ? AND mydb.member.member_pwd = ?';
   pool.getConnection(function (err, conn) {
     conn.query(sql, [user_id, password], function (err, row) {
       if (err) {
@@ -31,10 +31,10 @@ router.post('/login', function (req, res, next) {
             "<script> alert('존재하지않는 아이디입니다.');history.back();</script>"
           );
         } else {
-          sess.userId = row[0].member_id;
+          sess.userId = row[0].member_no;
           sess.userPwd = row[0].member_pwd;
           sess.userName = row[0].member_name;
-          console.log('네임 = ' + sess.userName);
+          console.log('네임 = ' + sess.userId);
           res.json({ success: true, sess: sess.userName });
           // res.redirect('/')
         }
@@ -47,7 +47,7 @@ router.post('/register', (req, res, next) => {
   var body = req.body;
   console.log(req.body);
   var sql =
-    'INSERT INTO member( member_id , member_pwd , member_name) VALUE(?,?,?)';
+    'INSERT INTO member( member_no , member_pwd , member_name) VALUE(?,?,?)';
   pool.getConnection(function (err, conn) {
     conn.query(sql, [body.id, body.pwd, body.name], function (err, row) {
       if (err) {
