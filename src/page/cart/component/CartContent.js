@@ -6,7 +6,6 @@ import Axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
 const CartContent = () => {
   let history = useHistory();
-
   const CartColumns = [
     {
       title: 'UserId',

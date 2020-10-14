@@ -1,11 +1,15 @@
 import React from 'react';
-
+//주소
+//상세주소
 const MypageContent = () => {
-    return (
-        <div>
-            마이페이지 입니다.
-        </div>
-    );
+  return (
+    <div>
+      <input type="text">dd</input>
+      <input type="text">dd</input>
+      <input type="text">dd</input>
+      <input type="text">dd</input>
+    </div>
+  );
 };
 
 export default MypageContent;

@@ -55,7 +55,6 @@ const CartMain = (props) => {
           </Layout>
         </Layout>
       </Layout>
-      ,
     </div>
   );
 };

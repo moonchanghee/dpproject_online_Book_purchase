@@ -120,7 +120,12 @@ const AppContainer = (props) => {
       }
     });
   };
+  ///////// 장바구니 onclick////////
 
+  const onAddCart = () => {
+    console.log('장바구니 추가');
+  };
+  /////////////////////////////////
   const callbacks = {
     onIdChange,
     onPwdChange,
@@ -132,6 +137,7 @@ const AppContainer = (props) => {
     setBool,
     LogoutOnClick,
     onChangeName,
+    onAddCart,
   };
   const states = {
     Name,
