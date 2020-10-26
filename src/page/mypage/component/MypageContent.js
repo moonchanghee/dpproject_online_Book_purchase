@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import 'antd/dist/antd.css';
-import { Table, Button } from 'antd';
+import { Table, Button, Popconfirm } from 'antd';
 //주소
 //상세주소
 const MypageContent = () => {
@@ -12,8 +12,6 @@ const MypageContent = () => {
       setAddress(res.data.row);
     });
   }, []);
-
-  console.log(address);
 
   const [currentPage, setCurrentPage] = useState(1); //시작
   const [postPerPage] = useState(5); //개수
@@ -38,15 +36,22 @@ const MypageContent = () => {
       title: 'Delete',
       dataIndex: '',
       key: 'x',
-      render: () => <a>Delete</a>,
+      render: (e, record) => (
+        <Popconfirm
+          title="삭제하시겠습니까?"
+          onConfirm={() => handleDelete(record.address_no)}
+        >
+          <a> Delete</a>
+        </Popconfirm>
+      ),
     },
   ];
 
   let indexOfLastPost = currentPage * postPerPage; //페이지에 마지막 데이터 인덱스/3
   let indexOfFirstPost = indexOfLastPost - postPerPage; //페이지 첫번째 데이터 인덱스/0
-  let datas = address.map((e) => e).slice(indexOfFirstPost, indexOfLastPost); //  1*5 last = 5 ,,, first = 0/0,3/
+  let datas = address.slice(indexOfFirstPost, indexOfLastPost); //  1*5 last = 5 ,,, first = 0/0,3/
   let count = []; //  2*5 last = 10 ,,, first = 5
-  let total = Math.ceil(address.map((e) => e).length / postPerPage); //버튼count
+  let total = Math.ceil(address.length / postPerPage); //버튼count
 
   for (let i = 1; i <= total; i++) {
     count.push(i);
@@ -62,6 +67,16 @@ const MypageContent = () => {
       console.log(res.data.success);
     });
   };
+
+  const handleDelete = (id) => {
+    console.log(id);
+    Axios.delete('/mypage/address/' + id).then((res) => {
+      if (res.data.success) {
+        console.log('2');
+      }
+    });
+  };
+  const [a, seta] = useState();
 
   return (
     <div>
@@ -90,6 +105,11 @@ const MypageContent = () => {
       <Table
         columns={columns}
         pagination={false}
+        onRow={(e) => ({
+          onClick: () => {
+            seta(e.address_no);
+          },
+        })}
         expandable={{
           expandedRowRender: (record) => (
             <p style={{ margin: 0 }}>{record.address_detail}</p>

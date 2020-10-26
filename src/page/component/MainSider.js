@@ -22,7 +22,7 @@ const MainSider = () => {
           <Menu.Item key="3">
             <Link to="/mypage">주소</Link>
           </Menu.Item>
-          <Menu.Item key="3">
+          <Menu.Item key="4">
             <Link to="/mypage/card">카드</Link>
           </Menu.Item>
         </SubMenu>

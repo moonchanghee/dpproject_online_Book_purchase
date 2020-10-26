@@ -6,7 +6,7 @@ var sess;
 
 router.get('/login', function (req, res, next) {
   sess = req.session;
-  console.log(sess);
+  // console.log(sess);
   if (sess.userName != null) {
     res.json({ sess: sess.userName, success: true });
   } else {
@@ -18,9 +18,9 @@ router.post('/login', function (req, res, next) {
   sess = req.session;
   var user_id = req.body.id;
   var password = req.body.password;
-  console.log(req.body);
+  // console.log(req.body);
   var sql =
-    'SELECT *FROM mydb.member WHERE mydb.member.member_no = ? AND mydb.member.member_pwd = ?';
+    'SELECT *FROM mydb1.member WHERE mydb1.member.member_no = ? AND mydb1.member.member_pwd = ?';
   pool.getConnection(function (err, conn) {
     conn.query(sql, [user_id, password], function (err, row) {
       if (err) {
@@ -45,10 +45,11 @@ router.post('/login', function (req, res, next) {
 
 router.post('/register', (req, res, next) => {
   var body = req.body;
-  console.log(req.body);
+  // console.log(req.body);
   var sql =
     'INSERT INTO member( member_no , member_pwd , member_name) VALUE(?,?,?)';
   pool.getConnection(function (err, conn) {
+    conn.release();
     conn.query(sql, [body.id, body.pwd, body.name], function (err, row) {
       if (err) {
         res.send(
@@ -57,7 +58,7 @@ router.post('/register', (req, res, next) => {
         console.log('에러' + err);
       } else {
         if (row) {
-          console.log(row);
+          // console.log(row);
           // res.redirect('/')
           res.send({ success: true });
         }

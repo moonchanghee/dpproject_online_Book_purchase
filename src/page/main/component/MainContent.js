@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import '../../cart/Cart.css';
-import { Table, Button } from 'antd';
+import Axios from 'axios';
+import { Table, Button, Input } from 'antd';
 import { Link, useHistory } from 'react-router-dom';
 const MainContent = (props) => {
-  console.log(props.data.map((e) => e.book_name));
   let history = useHistory();
   let MainColums = [
     {
@@ -22,9 +22,9 @@ const MainContent = (props) => {
   const [postPerPage] = useState(5); //개수
   let indexOfLastPost = currentPage * postPerPage; //페이지에 마지막 데이터 인덱스/3
   let indexOfFirstPost = indexOfLastPost - postPerPage; //페이지 첫번째 데이터 인덱스/0
-  let datas = props.data.map((e) => e).slice(indexOfFirstPost, indexOfLastPost); //  1*5 last = 5 ,,, first = 0/0,3/
+  let datas = props.data.slice(indexOfFirstPost, indexOfLastPost); //  1*5 last = 5 ,,, first = 0/0,3/
   let count = []; //  2*5 last = 10 ,,, first = 5
-  let total = Math.ceil(props.data.map((e) => e).length / postPerPage); //버튼count
+  let total = Math.ceil(props.data.length / postPerPage); //버튼count
 
   for (let i = 1; i <= total; i++) {
     count.push(i);
@@ -34,6 +34,17 @@ const MainContent = (props) => {
     <>
       <div id="wrapper">
         <div id="customer_section">
+          <Input.Group style={{ width: '25%' }}>
+            <Input.Search
+              enterButton
+              placeholder="name"
+              allowClear
+              onChange={props.onChangeInfo}
+              onSearch={props.submit}
+              size="middle"
+              value={props.info}
+            />
+          </Input.Group>
           <Table
             columns={MainColums}
             dataSource={datas}

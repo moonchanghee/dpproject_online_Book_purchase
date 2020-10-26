@@ -13,25 +13,16 @@ import TrueSession from './page/component/TrueSession';
 import FalseSession from './page/component/FalseSession';
 import MainDetail from './page/main/MainDetail';
 import PropTypes from 'prop-types';
-
+import Buypage from './page/buy/BuyPage';
+import BuySuccess from './page/buy/BuySuccess';
+import CartOrder from './page/cart/CartOrder';
+import CartSuccess from './page/cart/CartSuccess';
 import { Layout, Menu } from 'antd';
 import 'antd/dist/antd.css';
 const { SubMenu } = Menu;
-const { Header, Footer, Sider, Content } = Layout;
+const { Header } = Layout;
 
 const App = ({ states, callbacks }) => {
-  // useEffect(() => {
-  //   Axios.get('/user/login').then(res => {
-  //   if(res.data.success){
-  //     callbacks.setBool(true)
-  //     callbacks.setName(res.data.sess)
-  //     console.log(res.data.sess)
-  //   }else{
-  //     callbacks.setBool(false)
-  //   }
-  //   })
-  // },[])
-
   return (
     <>
       <BrowserRouter>
@@ -90,6 +81,36 @@ const App = ({ states, callbacks }) => {
             path="/main/:BookNo"
             render={(props) => (
               <MainDetail {...props} states={states} callbacks={callbacks} />
+            )}
+          />
+          <Route
+            exact
+            path="/buy/:BookNo"
+            render={(props) => (
+              <Buypage {...props} states={states} callbacks={callbacks} />
+            )}
+          />
+          <Route
+            exact
+            path="/buy/success/:BookNo"
+            render={(props) => (
+              <BuySuccess {...props} states={states} callbacks={callbacks} />
+            )}
+          />
+
+          <Route
+            exact
+            path="/cart/order"
+            render={(props) => (
+              <CartOrder {...props} states={states} callbacks={callbacks} />
+            )}
+          />
+
+          <Route
+            exact
+            path="/cart/success"
+            render={(props) => (
+              <CartSuccess {...props} states={states} callbacks={callbacks} />
             )}
           />
         </Switch>

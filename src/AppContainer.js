@@ -4,10 +4,26 @@ import App from './App';
 import Axios from 'axios';
 
 const AppContainer = (props) => {
-  // const [BookData, setBookData] = useState([]);
-
+  const [orderId, setOrderId] = useState();
+  // const [CartorderId, setCartOrderId] = useState([]);
+  let CartOrderId = [];
+  const [count, setCount] = useState(1);
   const [BookData, setBookData] = useState([]);
+  /////////////////////////////////////
+  const [info, setinfo] = useState('');
 
+  const onChangeInfo = (e) => {
+    setinfo(e.currentTarget.value);
+  };
+
+  const submit = () => {
+    Axios.post('/main/', { data: info }).then((res) =>
+      setBookData(res.data.row)
+    );
+    setinfo('');
+  };
+
+  //////////////////////////////////////
   useEffect(() => {
     Axios.get('/main/book').then((res) => {
       console.log(res.data.row);
@@ -27,7 +43,6 @@ const AppContainer = (props) => {
     });
   }, []);
 
-  // const [userName , setUserName] = useState("")
   //세션 판별 요소
   const [Bool, setBool] = useState(false);
 
@@ -126,6 +141,8 @@ const AppContainer = (props) => {
     console.log('장바구니 추가');
   };
   /////////////////////////////////
+
+  const [cart, setCart] = useState([]);
   const callbacks = {
     onIdChange,
     onPwdChange,
@@ -138,6 +155,11 @@ const AppContainer = (props) => {
     LogoutOnClick,
     onChangeName,
     onAddCart,
+    onChangeInfo,
+    submit,
+    setOrderId,
+    setCount,
+    setCart,
   };
   const states = {
     Name,
@@ -149,6 +171,11 @@ const AppContainer = (props) => {
     username,
     Bool,
     BookData,
+    info,
+    orderId,
+    count,
+    cart,
+    CartOrderId,
   };
 
   return <App callbacks={callbacks} states={states} />;

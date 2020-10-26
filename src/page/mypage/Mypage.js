@@ -3,7 +3,7 @@ import MainSider from '../component/MainSider';
 import MypageContent from './component/MypageContent';
 import Axios from 'axios';
 import { Layout, Menu } from 'antd';
-const { Header, Footer, Sider, Content } = Layout;
+const { Sider, Content } = Layout;
 
 const Mypage = (props) => {
   return (

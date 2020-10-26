@@ -3,13 +3,13 @@ var pool = require('../../config/config');
 var router = express.Router();
 
 router.get('/book', function (req, res, next) {
-  var sql = 'SELECT * FROM mydb.book';
+  var sql = 'SELECT * FROM mydb1.book';
   pool.getConnection(function (err, conn) {
+    conn.release();
     conn.query(sql, function (err, row) {
       if (err) {
         console.log(err);
       } else {
-        console.log(row);
         res.json({ data: '메인', row });
       }
     });
@@ -18,15 +18,31 @@ router.get('/book', function (req, res, next) {
 
 router.post('/detail', function (req, res, next) {
   var req_book_no = req.body.BookNo;
-  console.log(req_book_no);
-  var sql = 'SELECT * FROM mydb.book WHERE mydb.book.book_no = ?';
+  var sql = 'SELECT * FROM mydb1.book WHERE mydb1.book.book_no = ?';
   pool.getConnection(function (err, conn) {
-    conn.query(sql, req_book_no, function (err, row) {
+    conn.release();
+    conn.query(sql, [req_book_no], function (err, row) {
       if (err) {
         console.log(err);
       } else {
-        console.log(row);
         res.json({ success: true, row });
+      }
+    });
+  });
+});
+
+router.post('/', function (req, res, next) {
+  console.log('dddd');
+  console.log(req.body.data);
+  const data = req.body.data;
+  var sql = 'SELECT * FROM mydb1.book WHERE book_name LIKE ?';
+  pool.getConnection(function (err, conn) {
+    conn.release();
+    conn.query(sql, ['%' + data + '%'], function (err, row) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.json({ row });
       }
     });
   });

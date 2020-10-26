@@ -7,27 +7,6 @@ import ErrorList from 'antd/lib/form/ErrorList';
 const { Header, Footer, Sider, Content } = Layout;
 
 const CartMain = (props) => {
-  // const [cartData, setCartData] = useState([]);
-  // const cartData = [];
-
-  // const [cartData, setCartData] = useState({
-  //   key: '',
-  //   UserId: '',
-  // });
-
-  // useEffect(() => {
-  //   Axios.get('/cart').then((res) => {
-  //     if (res.data.success) {
-  //       console.log(res.data.data);
-  //       // setCartData(cartData.concat(res.data.data));
-  //       // cartData.push(res.data.data);
-  //       console.log(cartData);
-  //     } else {
-  //       alert('Failed');
-  //     }
-  //   });
-  // }, []);
-
   return (
     <div>
       <Layout theme="light">
@@ -45,7 +24,7 @@ const CartMain = (props) => {
               }}
             >
               {props.states.Bool ? (
-                <CartContent />
+                <CartContent props={props} />
               ) : (
                 '장바구니 조회하려면 로그인하세요'
               )}

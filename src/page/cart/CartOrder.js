@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import MainSider from '../component/MainSider';
-import BuyContent from './BuyContent';
-import BuySuccess from './BuySuccess';
 import Axios from 'axios';
 import 'antd/dist/antd.css';
 import { useHistory } from 'react-router-dom';
 import { Layout, InputNumber, List, Button, Radio, Input } from 'antd';
 const { Sider, Content } = Layout;
 
-const BuyPage = (props) => {
+const CartOrder = (props) => {
   let history = useHistory();
-  const BookNo = props.match.params.BookNo;
-  const Data = { BookNo: BookNo };
   const [Book, setBook] = useState([]);
   // const [count, setCount] = useState(1);
   const [userCard, setUserCard] = useState([]);
@@ -20,34 +16,20 @@ const BuyPage = (props) => {
   const [SelectCard, setSelectCard] = useState([]);
   const [SelectAddress, setSelectAddress] = useState([]);
   const [price, setprice] = useState();
-  // const [orderId, setOrderId] = useState();
-  // let orderId;
-
+  const [orderid, setOrderId] = useState();
+  let totalPrice = 0;
   useEffect(() => {
-    Axios.post('/main/detail', Data).then((res) => {
-      if (res.data.success) {
-        console.log('성공');
-        console.log(res.data.row);
-        setBook(res.data.row);
-        for (let i = 0; i < res.data.row.length; i++) {
-          setprice(res.data.row[i].book_price);
-        }
-      } else {
-        console.log('실패');
-      }
-    });
     Axios.get('/buy/card').then((res) => setUserCard(res.data.row));
     Axios.get('/buy/address').then((res) => setUserAddress(res.data.row));
   }, []);
 
-  const onChange = (value) => {
-    console.log('changed', value);
-    props.callbacks.setCount(value);
-  };
-
-  const render1 = Book.map((e) => {
+  const render1 = props.states.cart.map((e) => {
+    {
+      totalPrice += e.book_price * e.basket_book_count;
+    }
     return (
       <>
+        <br />
         <ul key={e.book_no}>
           <li>Book Number : {e.book_no}</li>
           <br />
@@ -55,16 +37,10 @@ const BuyPage = (props) => {
           <br />
           <li>Book Price : {e.book_price}</li>
           <br />
-          <li>Book count : {e.book_count}</li>
-          <br />
-          수량:{' '}
-          <InputNumber
-            min={1}
-            max={e.book_count}
-            defaultValue={1}
-            onChange={onChange}
-          />
+          <li>order count : {e.basket_book_count}</li>
         </ul>
+        합계 : {e.book_price * e.basket_book_count}
+        <br />
       </>
     );
   });
@@ -77,22 +53,43 @@ const BuyPage = (props) => {
   };
 
   const OrderClick = () => {
-    console.log(SelectCard);
-    console.log(SelectAddress);
+    console.log(props.states.cart.length);
+    console.log(props.states.cart);
     let body = [
-      Data,
+      1,
       SelectCard,
       SelectAddress,
-      { order_price: price * props.states.count },
+      {
+        order_price: totalPrice,
+      },
     ];
-    Axios.post('/buy/order', body).then((res) => {
-      if (res.data.success) {
-        props.callbacks.setOrderId(res.data.orderid);
-        alert('구매 완료');
-        history.push(`/buy/success/${Data.BookNo}`);
-      }
-    });
+    let id;
+    Axios.post('/buy/order', body)
+      .then((res) => {
+        if (res.data.success) {
+          props.states.CartOrderId.push(res.data.orderid);
+          id = res.data.orderid;
+        }
+      })
+      .then((e) => {
+        for (let i = 0; i < props.states.cart.length; i++) {
+          let body = [
+            id,
+            props.states.cart[i].basket_book_count,
+            { BookNo: props.states.cart[i].book_book_no },
+          ];
+          Axios.post('/buy/orderdetail', body).then((res) => {
+            if (res.data.success) {
+              console.log('성공');
+              history.push(`/`);
+            } else {
+              console.log('실패');
+            }
+          });
+        }
+      });
   };
+
   return (
     <div>
       {' '}
@@ -101,6 +98,7 @@ const BuyPage = (props) => {
           <Sider width={200} className="site-layout-background">
             <MainSider />
           </Sider>
+
           <Layout style={{ padding: '0 24px 24px' }}>
             <Content
               className="site-layout-background"
@@ -111,7 +109,9 @@ const BuyPage = (props) => {
               }}
             >
               {render1}
-              합계 : {price * props.states.count}
+              <br />
+              <br />
+              총합 : {totalPrice}
               <br />
               <br />
               <br />
@@ -159,4 +159,4 @@ const style = {
     backgroundColor: '#ffffff',
   },
 };
-export default BuyPage;
+export default CartOrder;

@@ -3,6 +3,7 @@ var Users = require('./route/users');
 var Cart = require('./route/Cart');
 var Main = require('./route/Main');
 var Mypage = require('./route/Mypage');
+var Buy = require('./route/Buy');
 
 var app = express();
 var session = require('express-session');
@@ -25,5 +26,6 @@ app.use('/main', Main);
 app.use('/mypage', Mypage);
 app.use('/user', Users);
 app.use('/cart', Cart);
+app.use('/buy', Buy);
 
 app.listen(port, () => console.log(`listening on port ${port}!`));
