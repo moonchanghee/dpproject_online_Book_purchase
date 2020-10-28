@@ -6,7 +6,6 @@ const CardContent = () => {
   const [card, setCard] = useState([]);
   useEffect(() => {
     Axios.get('/mypage/card').then((res) => {
-      console.log(res.data.row);
       setCard(res.data.row);
     });
   }, []);

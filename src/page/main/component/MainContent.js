@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../cart/Cart.css';
-import Axios from 'axios';
 import { Table, Button, Input } from 'antd';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 const MainContent = (props) => {
   let history = useHistory();
   let MainColums = [
@@ -53,7 +52,6 @@ const MainContent = (props) => {
             onRow={(e) => ({
               onClick: () => {
                 history.push(`/main/${e.book_no}`);
-                // console.log('key : ' + e.book_no);
               },
             })}
           />

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 import App from './App';
 import Axios from 'axios';
 
@@ -9,7 +9,7 @@ const AppContainer = (props) => {
   let CartOrderId = [];
   const [count, setCount] = useState(1);
   const [BookData, setBookData] = useState([]);
-  /////////////////////////////////////
+  //////////////////////////////onSubmitregister///////
   const [info, setinfo] = useState('');
 
   const onChangeInfo = (e) => {
@@ -127,11 +127,11 @@ const AppContainer = (props) => {
     };
 
     Axios.post('/user/register', bodys).then((res) => {
-      console.log('DD');
       if (res.data.success) {
-        // history.push('/user/login')
+        alert(res.data.msg);
+        // history.push('/');
       } else {
-        console.log('no');
+        alert(res.data.msg);
       }
     });
   };

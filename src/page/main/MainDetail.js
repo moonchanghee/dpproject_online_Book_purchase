@@ -10,11 +10,6 @@ const MainDetail = (props) => {
   const Data = { BookNo: BookNo };
   const [Book, setBook] = useState([]);
   const [count, setCount] = useState(1);
-  const [info, setinfo] = useState('');
-
-  const submit = () => {
-    console.log(info);
-  };
 
   useEffect(() => {
     Axios.post('/main/detail', Data).then((res) => {
@@ -61,7 +56,7 @@ const MainDetail = (props) => {
     <>
       <Layout theme="light">
         <Layout>
-          <Sider className="site-layout-background">
+          <Sider className="site-layout-background" style={{ height: '800px' }}>
             <MainSider />
           </Sider>
           <Layout style={{ padding: '0 24px 24px' }}>

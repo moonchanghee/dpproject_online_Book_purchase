@@ -12,7 +12,6 @@ router.get('/address', function (req, res, next) {
       if (err) {
         console.log(err);
       } else {
-        // console.log(row);
         res.json({ success: true, row });
       }
     });

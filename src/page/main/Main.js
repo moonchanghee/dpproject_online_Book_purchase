@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import Axios from 'axios';
+import React from 'react';
 import MainContent from './component/MainContent';
-import CartContent from '../cart/component/CartContent';
 import MainSider from '../component/MainSider';
-import { Layout, Menu, Input } from 'antd';
+import { Layout, Menu } from 'antd';
 import 'antd/dist/antd.css';
-const { SubMenu } = Menu;
 const { Sider, Content } = Layout;
 
 const Main = (props) => {
@@ -13,7 +10,7 @@ const Main = (props) => {
     <>
       <Layout theme="light">
         <Layout>
-          <Sider width={200} className="site-layout-background">
+          <Sider style={{ height: '800px' }} className="site-layout-background">
             <MainSider />
           </Sider>
           <Layout style={{ padding: '0 24px 24px' }}>

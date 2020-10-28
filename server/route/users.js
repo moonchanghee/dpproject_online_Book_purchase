@@ -52,15 +52,13 @@ router.post('/register', (req, res, next) => {
     conn.release();
     conn.query(sql, [body.id, body.pwd, body.name], function (err, row) {
       if (err) {
-        res.send(
-          "<script>alert('아이디가 중복되었습니다.');history.back();</script>"
-        );
+        res.send({ success: false, msg: '아이디가 중복되었습니다' });
         console.log('에러' + err);
       } else {
         if (row) {
           // console.log(row);
           // res.redirect('/')
-          res.send({ success: true });
+          res.send({ success: true, msg: '회원가입 성공', url: '/user/login' });
         }
       }
     });

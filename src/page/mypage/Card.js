@@ -9,7 +9,7 @@ const Card = (props) => {
     <div>
       <Layout theme="light">
         <Layout>
-          <Sider width={200} className="site-layout-background">
+          <Sider style={{ height: '800px' }} className="site-layout-background">
             <MainSider />
             {props.states.username}
           </Sider>

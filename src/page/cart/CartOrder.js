@@ -67,7 +67,7 @@ const CartOrder = (props) => {
     Axios.post('/buy/order', body)
       .then((res) => {
         if (res.data.success) {
-          props.states.CartOrderId.push(res.data.orderid);
+          // props.states.CartOrderId.push(res.data.orderid);
           id = res.data.orderid;
         }
       })
@@ -80,9 +80,13 @@ const CartOrder = (props) => {
           ];
           Axios.post('/buy/orderdetail', body).then((res) => {
             if (res.data.success) {
-              console.log('성공');
-              history.push(`/`);
-            } else {
+              Axios.delete('/cart/' + props.states.cart[i].book_book_no);
+              if (i + 1 == props.states.cart.length) {
+                alert('구매 완료');
+                history.push(`/`);
+              }
+            } else if (i + 1 == props.states.cart.length) {
+              alert('구매 실패');
               console.log('실패');
             }
           });

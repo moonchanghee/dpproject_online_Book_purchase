@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import MainSider from '../component/MainSider';
-import BuyContent from './BuyContent';
-import BuySuccess from './BuySuccess';
 import Axios from 'axios';
 import 'antd/dist/antd.css';
 import { useHistory } from 'react-router-dom';
@@ -13,15 +11,11 @@ const BuyPage = (props) => {
   const BookNo = props.match.params.BookNo;
   const Data = { BookNo: BookNo };
   const [Book, setBook] = useState([]);
-  // const [count, setCount] = useState(1);
   const [userCard, setUserCard] = useState([]);
   const [userAddress, setUserAddress] = useState([]);
-  const [buy, setBuy] = useState('');
   const [SelectCard, setSelectCard] = useState([]);
   const [SelectAddress, setSelectAddress] = useState([]);
   const [price, setprice] = useState();
-  // const [orderId, setOrderId] = useState();
-  // let orderId;
 
   useEffect(() => {
     Axios.post('/main/detail', Data).then((res) => {
@@ -85,13 +79,28 @@ const BuyPage = (props) => {
       SelectAddress,
       { order_price: price * props.states.count },
     ];
-    Axios.post('/buy/order', body).then((res) => {
-      if (res.data.success) {
-        props.callbacks.setOrderId(res.data.orderid);
-        alert('구매 완료');
-        history.push(`/buy/success/${Data.BookNo}`);
-      }
-    });
+    let id;
+
+    Axios.post('/buy/order', body)
+      .then((res) => {
+        if (res.data.success) {
+          id = res.data.orderid;
+        }
+      })
+      .then((e) =>
+        Axios.post('/buy/orderdetail', [id, props.states.count, Data]).then(
+          (res) => {
+            if (res.data.success) {
+              console.log('성공');
+              alert('구매 완료');
+              history.push(`/`);
+            } else {
+              alert('구매 실패');
+              console.log('실패');
+            }
+          }
+        )
+      );
   };
   return (
     <div>
