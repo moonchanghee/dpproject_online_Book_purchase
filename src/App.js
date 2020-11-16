@@ -13,6 +13,7 @@ import PropTypes from 'prop-types';
 import Buypage from './page/buy/BuyPage';
 import CartOrder from './page/cart/CartOrder';
 import { Layout, Menu } from 'antd';
+import coupon from './page/coupon/coupon';
 import 'antd/dist/antd.css';
 const { SubMenu } = Menu;
 const { Header } = Layout;
@@ -91,6 +92,14 @@ const App = ({ states, callbacks }) => {
             path="/cart/order"
             render={(props) => (
               <CartOrder {...props} states={states} callbacks={callbacks} />
+            )}
+          />
+
+          <Route
+            exact
+            path="/coupon"
+            render={(props) => (
+              <coupon {...props} states={states} callbacks={callbacks} />
             )}
           />
         </Switch>

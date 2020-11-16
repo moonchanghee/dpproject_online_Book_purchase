@@ -24,7 +24,7 @@ const Register = (props) => {
         />
         <input
           type="text"
-          placeholder="id"
+          placeholder="member_number"
           value={props.states.Id}
           onChange={props.callbacks.onIdHandler}
         />

@@ -14,7 +14,7 @@ const CardContent = () => {
   const [CardName, setCardName] = useState();
   const [CardValidity, setCardValidity] = useState();
   const [currentPage, setCurrentPage] = useState(1); //시작
-  const [postPerPage] = useState(5); //개수
+  const [postPerPage] = useState(3); //개수
   const onChangeCardNo = (e) => {
     setCardNo(e.currentTarget.value);
   };

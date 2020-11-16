@@ -144,4 +144,24 @@ router.get('/success/:id', function (req, res, next) {
     });
   });
 });
+
+///////////////////////////
+
+router.get('/coupon', function (req, res, next) {
+  var member_no = req.session.userId;
+  var sql =
+    'SELECT * FROM mydb1.coupon , mydb1.member WHERE mydb1.address.member_member_no = member.member_no AND member.member_no = ? ';
+  pool.getConnection(function (err, conn) {
+    conn.release();
+    conn.query(sql, [member_no], function (err, row) {
+      if (err) {
+        console.log('에러' + err);
+      } else {
+        // console.log(row);
+        res.json({ row });
+      }
+    });
+  });
+});
+
 module.exports = router;

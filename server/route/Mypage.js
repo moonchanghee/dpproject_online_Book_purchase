@@ -45,6 +45,36 @@ router.post('/address', function (req, res, next) {
   });
 });
 
+// update
+// var sql = 'UPDATE table SET name=?, age=? WHERE id=?';
+
+// router.post('/address/up', function (req, res, next) {
+//   let address_no = req.body.address_no;
+//   let address_basic = req.body.address_basic;
+//   let address_detail = req.body.address_detail;
+//   let member_id = req.session.userId;
+//   let sql =
+//     'UPDATE address SET address_no= ? , address_basic =? ,address_detail=? , member_member_no=?';
+//   pool.getConnection(function (err, conn) {
+//     conn.release();
+//     conn.query(
+//       sql,
+//       [address_no, address_basic, address_detail, member_id],
+//       function (err, row) {
+//         if (err) {
+//           res.json({ success: false });
+//           console.log('에러' + err);
+//         } else {
+//           if (row) {
+//             // console.log(row);
+//             res.json({ success: true, row });
+//           }
+//         }
+//       }
+//     );
+//   });
+// });
+
 router.post('/card', function (req, res, next) {
   let card_no = req.body.card_no;
   let card_name = req.body.card_name;

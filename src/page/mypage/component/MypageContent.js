@@ -14,7 +14,7 @@ const MypageContent = () => {
   }, []);
 
   const [currentPage, setCurrentPage] = useState(1); //시작
-  const [postPerPage] = useState(5); //개수
+  const [postPerPage] = useState(3); //개수
   const [AddressNo, setAddressNo] = useState();
   const [AddressBasic, setAddressBasic] = useState('');
   const [AddressDetail, setAddressDetail] = useState('');
@@ -78,6 +78,12 @@ const MypageContent = () => {
   };
   const [a, seta] = useState();
 
+  // const onChangeAddress = () => {
+  //   Axios.post('/mypage/address/up', body).then((res) => {
+  //     console.log(res.data.success);
+  //   });
+  // };
+
   return (
     <div>
       <form onSubmit={onSubmit}>
@@ -101,6 +107,7 @@ const MypageContent = () => {
         ></input>
         <button>주소 저장하기</button>
       </form>
+      {/**<button onClick={onChangeAddress}>주소 수정하기</button>*/}
       <br />
       <Table
         columns={columns}

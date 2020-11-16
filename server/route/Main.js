@@ -47,5 +47,39 @@ router.post('/', function (req, res, next) {
     });
   });
 });
+////////////////////////////////////////////////////////////////////////////////
+// router.post('/rev', function (req, res, next) {
+//   console.log('dddd');
+//   console.log(req.body.review);
+//   var coment = req.body.review;
+//   var member_member_no = req.session.userId;
+
+//   var sql = 'INSERT INTO mydb1.review(member_member_no,coment) VALUE(?,?)';
+//   pool.getConnection(function (err, conn) {
+//     conn.release();
+//     conn.query(sql, [member_member_no, coment], function (err, row) {
+//       if (err) {
+//         console.log(err);
+//       } else {
+//         res.json({ success: true });
+//       }
+//     });
+//   });
+// });
+
+// router.get('/rev', function (req, res, next) {
+//   console.log('dddd');
+//   var sql = 'SELECT * FROM  mydb1.review';
+//   pool.getConnection(function (err, conn) {
+//     conn.release();
+//     conn.query(sql, function (err, row) {
+//       if (err) {
+//         console.log(err);
+//       } else {
+//         res.json({ row: row });
+//       }
+//     });
+//   });
+// });
 
 module.exports = router;

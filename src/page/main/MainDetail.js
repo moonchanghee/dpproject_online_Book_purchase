@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
-import { Layout, Button, InputNumber, Input } from 'antd';
+import { Layout, Button, InputNumber, List } from 'antd';
 import { useHistory } from 'react-router-dom';
 import MainSider from '../component/MainSider';
 const { Sider, Content } = Layout;
@@ -10,6 +10,11 @@ const MainDetail = (props) => {
   const Data = { BookNo: BookNo };
   const [Book, setBook] = useState([]);
   const [count, setCount] = useState(1);
+  ///
+  const [review, setReview] = useState('');
+  const [redata, setredata] = useState();
+  //
+  const data = [{ id: 1, content: 'ddddddd' }];
 
   useEffect(() => {
     Axios.post('/main/detail', Data).then((res) => {
@@ -21,11 +26,31 @@ const MainDetail = (props) => {
         console.log('실패');
       }
     });
+    // Axios.get('/main/rev').then((res) => {
+    //   setredata(res.data.row);
+    // });
   }, []);
   const onChange = (value) => {
     console.log('changed', value);
     setCount(value);
   };
+  /////////////////////////////////////////////////////////////
+
+  // const Review = () => {
+  //   Axios.post('/main/rev', { review: review }).then((res) => {
+  //     if (res.data.success) {
+  //       alert('등록완료');
+  //     } else {
+  //       alert('등록실패');
+  //     }
+  //   });
+  // };
+
+  // const onChangeReview = (e) => {
+  //   setReview(e.currentTarget.value);
+  // };
+  // console.log(redata);
+  ////////////////////////////////////////////////////////////
   const render = Book.map((e) => {
     return (
       <>
@@ -96,6 +121,26 @@ const MainDetail = (props) => {
               ) : (
                 '구매하려면 로그인 하세요'
               )}
+              {/************** 
+                        <List
+                itemLayout="horizontal"
+                dataSource={redata}
+                renderItem={(item) => (
+                  <List.Item>
+                    <List.Item.Meta
+                      title={'id :' + item.member_member_no}
+                      description={'coment :' + item.coment}
+                    />
+                  </List.Item>
+                )}
+                />**/}
+
+              {/**<input
+                type="text"
+                value={review}
+                onChange={onChangeReview}
+              ></input>
+              <button onClick={Review}>등록</button>**/}
             </Content>
           </Layout>
         </Layout>
