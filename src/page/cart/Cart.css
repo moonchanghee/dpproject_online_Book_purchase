@@ -5,16 +5,14 @@
 } */
 
 #customer_section {
-    margin-top: 15%;
-    text-align: center;
-    height: 600px;
-  }
-  
-  #Btn-layout {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    margin-bottom: 5%;
-    padding-right: 15%;
-  }
-  
+  margin-top: 15%;
+  text-align: center;
+  height: 600px;
+}
+
+#Btn-layout {
+  bottom: 0;
+  width: 100%;
+  margin-bottom: 5%;
+  padding-right: 15%;
+}

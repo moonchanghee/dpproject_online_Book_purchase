@@ -9,7 +9,7 @@ const { Header, Footer, Sider, Content } = Layout;
 const CartMain = (props) => {
   return (
     <div>
-      <Layout theme="light">
+      <Layout theme="light" style={{ minHeight: '100vh' }}>
         <Layout>
           <Sider className="site-layout-background">
             <MainSider />

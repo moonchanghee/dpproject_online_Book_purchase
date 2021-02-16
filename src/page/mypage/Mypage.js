@@ -8,7 +8,7 @@ const { Sider, Content } = Layout;
 const Mypage = (props) => {
   return (
     <div>
-      <Layout theme="light">
+      <Layout theme="light" style={{ minHeight: '100vh' }}>
         <Layout>
           <Sider style={{ height: '800px' }} className="site-layout-background">
             <MainSider />

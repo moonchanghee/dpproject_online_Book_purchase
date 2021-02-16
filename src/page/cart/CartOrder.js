@@ -9,7 +9,6 @@ const { Sider, Content } = Layout;
 const CartOrder = (props) => {
   let history = useHistory();
   const [Book, setBook] = useState([]);
-  // const [count, setCount] = useState(1);
   const [userCard, setUserCard] = useState([]);
   const [userAddress, setUserAddress] = useState([]);
   const [buy, setBuy] = useState('');
